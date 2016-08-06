@@ -1,0 +1,1 @@
+c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\HTMLToWin2DParser.csproj;x86

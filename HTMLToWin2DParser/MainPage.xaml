@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="HTMLToWin2DParser.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HTMLToWin2DParser"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:xaml="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel HorizontalAlignment="Center">
+            <TextBox x:Name="URLTextBox" PlaceholderText="Enter URL..." Height="50" Width="400"/>
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="ParseFromURLButton" Content="Parse this page!" Tapped="UIElement_OnTapped"></Button>
+                <Button x:Name="ParseSampleButton" Content="Parse sample file" Tapped="ParseSampleButton_OnTapped"></Button>
+            </StackPanel>
+            <TextBlock x:Name="ResultBlockA" Height="400" Width="400"/>
+            <TextBlock x:Name="ResultBlockB" Height="400" Width="400"/>
+            <TextBlock x:Name="ResultBlockC" Height="400" Width="400"/>
+            
+        </StackPanel>
+
+        <xaml:CanvasControl x:Name="xCanvas" ClearColor="CornflowerBlue" Width="500" Height="500" Margin="0,200,0,0"/>
+    </Grid>
+</Page>
