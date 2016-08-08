@@ -40,11 +40,14 @@ namespace HTMLToWin2DParser
         private string _sampleHTMLString;
         private List<ParseItem> _parsedItems = new List<ParseItem>();
         private CanvasTextLayout _tl;
+        private List<CanvasTextLayout> _textLayouts = new List<CanvasTextLayout>();
+        private List<ParseItem> _breaks;
+        private int _indexOffset;
         
         public MainPage()
         {
          //   _sampleHTMLString = "<html> <ol> <li> ABCDE <B> bold </B> </li> </ol> </html>";
-            _sampleHTMLString = "<p>  hello <b> text </b> </p> <h1> <i> italics </i> </h1>";
+            _sampleHTMLString = "<html> hello <br> <b> text </b> <h1> italics </h1> </html>";
             this.InitializeComponent();
 
             xCanvas.Draw += XCanvasOnDraw;
@@ -55,9 +58,16 @@ namespace HTMLToWin2DParser
         {
             if (_tl == null)
                 return;
+
+            var verticalOffset = (float) 0.0;
             using (var ds = args.DrawingSession)
             {
-                ds.DrawTextLayout(_tl, 0,0, Colors.Black);
+                foreach (var textLayout in _textLayouts)
+                {
+                    ds.DrawTextLayout(textLayout, 0, verticalOffset, Colors.Black);
+                    verticalOffset += (float) textLayout.DrawBounds.Height;
+                }
+                
             }
         }
 
@@ -78,10 +88,16 @@ namespace HTMLToWin2DParser
             var result = GetHTMLFromSample();
             RecursiveParsing(result.DocumentNode.ChildNodes,0);
 
-            var text = HtmlRemoval.StripTagsRegex(_sampleHTMLString);
+            _breaks = (_parsedItems.Where(s => s.Tag == "br" || s.Tag == "p" || s.Tag == "ol" || s.Tag == "ul" || s.Tag == "li")).ToList();
 
-            _tl = new CanvasTextLayout(xCanvas, text, new CanvasTextFormat(), 300, 300);
-            
+            var text = HtmlRemoval.StripTagsRegex(_sampleHTMLString);
+            var substring = text.Substring(0, _breaks.First().StartIndex);
+            _indexOffset = _breaks.First().StartIndex;
+            Debug.WriteLine("Offset = " + _indexOffset);
+            _breaks.RemoveAt(0);
+
+            _tl = new CanvasTextLayout(xCanvas, substring, new CanvasTextFormat(), 300, 300);
+            _textLayouts.Add(_tl);
 
             foreach (var parsedItem in _parsedItems)
             {
@@ -89,61 +105,78 @@ namespace HTMLToWin2DParser
 
                 if (parsedItem.Tag == "b")
                 {
-                    _tl.SetFontWeight(parsedItem.StartIndex, parsedItem.Length, FontWeights.ExtraBold);
+                    _tl.SetFontWeight(parsedItem.StartIndex - _indexOffset, parsedItem.Length, FontWeights.ExtraBold);
                 }
 
                 if  (parsedItem.Tag == "br")
                 {
                     
-                    //Microsoft.Graphics.Canvas.Text.CanvasClusterProperties.Newline;
+                    var followingText = text.Substring(parsedItem.StartIndex);
+                    if (_breaks.Count > 0)
+                    {
+                        substring = followingText.Substring(0, _breaks.First().StartIndex);
+                        _indexOffset += _breaks.First().StartIndex;
+                        Debug.WriteLine("Offset = " + _indexOffset);
+                        _breaks.RemoveAt(0);
+                    }
+                    else
+                    {
+                        substring = followingText;
+                    }
                     
+                    _tl = new CanvasTextLayout(xCanvas, substring, new CanvasTextFormat(), 300, 1000);
+                    _textLayouts.Add(_tl);
+
                 }
 
                 if (parsedItem.Tag == "p")
                 {
-                    //float space = Single.Parse(xCanvas.ActualWidth.ToString());
-                    //float space = (float) 10.0;
-                    //_tl.SetCharacterSpacing(parsedItem.StartIndex, parsedItem.Length, space, space, 0);
+                    _textLayouts.Add(_tl);
+                    var followingText = text.Substring(parsedItem.StartIndex);
+                    _tl = new CanvasTextLayout(xCanvas, followingText, new CanvasTextFormat(), 300, 1000);
+
+                    float space = (float) 4.0;
+                    _tl.SetCharacterSpacing(0, parsedItem.Length, space, 0, 0);
                 }
 
                 if (parsedItem.Tag == "u")
                 {
-                    _tl.SetUnderline(parsedItem.StartIndex, parsedItem.Length, true);
+                    _tl.SetUnderline(parsedItem.StartIndex - _indexOffset, parsedItem.Length, true);
                 }
 
                 if (parsedItem.Tag == "i")
                 {
-                    _tl.SetFontStyle(parsedItem.StartIndex, parsedItem.Length, FontStyle.Italic);
+                    _tl.SetFontStyle(parsedItem.StartIndex - _indexOffset, parsedItem.Length, FontStyle.Italic);
                 }
 
                 if (parsedItem.Tag == "strike")
                 {
-                    _tl.SetStrikethrough(parsedItem.StartIndex, parsedItem.Length, true);
+                    _tl.SetStrikethrough(parsedItem.StartIndex - _indexOffset, parsedItem.Length, true);
                 }
 
                 if (parsedItem.Tag == "h1")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 36);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 36);
                 }
                 if (parsedItem.Tag == "h2")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 28);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 28);
                 }
                 if (parsedItem.Tag == "h3")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 22);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 22);
                 }
                 if (parsedItem.Tag == "h4")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 18);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 18);
                 }
                 if (parsedItem.Tag == "h5")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 13);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 13);
                 }
                 if (parsedItem.Tag == "h6")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 11);
+                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 11);
                 }
                 
                 if (parsedItem.Tag == "ol")
@@ -158,7 +191,7 @@ namespace HTMLToWin2DParser
 
                 if (parsedItem.Tag == "li")
                 {
-                    
+                    AddLineBreak(parsedItem);
                 }
             }
 
@@ -171,6 +204,11 @@ namespace HTMLToWin2DParser
             HtmlDocument document = new HtmlDocument();
             document.LoadHtml(_sampleHTMLString);
             return document;
+        }
+
+        public void AddLineBreak(ParseItem item)
+        {
+            item.Text = item.Text + "\n";
         }
 
         public void RecursiveParsing(IEnumerable<HtmlNode> children, int currentIndex)
