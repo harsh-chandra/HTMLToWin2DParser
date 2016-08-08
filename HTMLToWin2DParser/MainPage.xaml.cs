@@ -44,7 +44,7 @@ namespace HTMLToWin2DParser
         public MainPage()
         {
          //   _sampleHTMLString = "<html> <ol> <li> ABCDE <B> bold </B> </li> </ol> </html>";
-            _sampleHTMLString = "<p>  hello &nbsp;  <b> text  </b></p>";
+            _sampleHTMLString = "<p>  hello <b> text </b> </p> <h1> <i> italics </i> </h1>";
             this.InitializeComponent();
 
             xCanvas.Draw += XCanvasOnDraw;
@@ -92,6 +92,74 @@ namespace HTMLToWin2DParser
                     _tl.SetFontWeight(parsedItem.StartIndex, parsedItem.Length, FontWeights.ExtraBold);
                 }
 
+                if  (parsedItem.Tag == "br")
+                {
+                    
+                    //Microsoft.Graphics.Canvas.Text.CanvasClusterProperties.Newline;
+                    
+                }
+
+                if (parsedItem.Tag == "p")
+                {
+                    //float space = Single.Parse(xCanvas.ActualWidth.ToString());
+                    //float space = (float) 10.0;
+                    //_tl.SetCharacterSpacing(parsedItem.StartIndex, parsedItem.Length, space, space, 0);
+                }
+
+                if (parsedItem.Tag == "u")
+                {
+                    _tl.SetUnderline(parsedItem.StartIndex, parsedItem.Length, true);
+                }
+
+                if (parsedItem.Tag == "i")
+                {
+                    _tl.SetFontStyle(parsedItem.StartIndex, parsedItem.Length, FontStyle.Italic);
+                }
+
+                if (parsedItem.Tag == "strike")
+                {
+                    _tl.SetStrikethrough(parsedItem.StartIndex, parsedItem.Length, true);
+                }
+
+                if (parsedItem.Tag == "h1")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 36);
+                }
+                if (parsedItem.Tag == "h2")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 28);
+                }
+                if (parsedItem.Tag == "h3")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 22);
+                }
+                if (parsedItem.Tag == "h4")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 18);
+                }
+                if (parsedItem.Tag == "h5")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 13);
+                }
+                if (parsedItem.Tag == "h6")
+                {
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 11);
+                }
+                
+                if (parsedItem.Tag == "ol")
+                {
+                    
+                }
+                
+                if (parsedItem.Tag == "ul")
+                {
+                    
+                }
+
+                if (parsedItem.Tag == "li")
+                {
+                    
+                }
             }
 
 

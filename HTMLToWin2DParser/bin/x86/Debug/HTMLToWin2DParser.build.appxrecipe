@@ -9,16 +9,16 @@
     <SolutionConfiguration>Debug|x86</SolutionConfiguration>
     <PackageArchitecture>x86</PackageArchitecture>
     <PackageIdentityName>8cc3bd3e-91f9-4dc9-a738-f7c452a416f6</PackageIdentityName>
-    <IntermediateOutputPath>c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\obj\x86\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\obj\x86\Debug\</IntermediateOutputPath>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\HTMLToWin2DParser.exe">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\HTMLToWin2DParser.exe">
       <PackagePath>entrypoint\HTMLToWin2DParser.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Brown GFX\.nuget\packages\HtmlAgilityPack\1.4.9.5\lib\NetCore45\HtmlAgilityPack.dll">
@@ -348,49 +348,49 @@
     <AppxPackagedFile Include="C:\Users\Brown GFX\.nuget\packages\Win2D.uwp\1.18.0\lib\uap10.0\Microsoft.Graphics.Canvas.winmd">
       <PackagePath>Microsoft.Graphics.Canvas.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\ApplicationInsights.config">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\ApplicationInsights.config">
       <PackagePath>ApplicationInsights.config</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\HTMLToWin2DParser.xr.xml">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\HTMLToWin2DParser.xr.xml">
       <PackagePath>HTMLToWin2DParser.xr.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="c:\users\brown gfx\documents\visual studio 2015\Projects\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\Core\HTMLToWin2DParser.exe">
+    <AppxPackagedFile Include="C:\Users\Brown GFX\Documents\HTMLToWin2DParser\HTMLToWin2DParser\bin\x86\Debug\Core\HTMLToWin2DParser.exe">
       <PackagePath>HTMLToWin2DParser.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>
