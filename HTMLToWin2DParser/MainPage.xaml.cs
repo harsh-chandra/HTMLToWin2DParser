@@ -47,7 +47,8 @@ namespace HTMLToWin2DParser
         public MainPage()
         {
          //   _sampleHTMLString = "<html> <ol> <li> ABCDE <B> bold </B> </li> </ol> </html>";
-            _sampleHTMLString = "<html> hello <br> <b> text </b> <h1> italics </h1> </html>";
+            _sampleHTMLString = "<html> <p> This is a paragraph. It should be its own block of text. AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+                                " </p> hello <b> text </b> <h6> italics </h6> <br> <i> world </i> <ol> <li> <u>Item1</u></li> </ol></html>";
             this.InitializeComponent();
 
             xCanvas.Draw += XCanvasOnDraw;
@@ -86,17 +87,18 @@ namespace HTMLToWin2DParser
         private void ParseSampleButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var result = GetHTMLFromSample();
+
             RecursiveParsing(result.DocumentNode.ChildNodes,0);
 
             _breaks = (_parsedItems.Where(s => s.Tag == "br" || s.Tag == "p" || s.Tag == "ol" || s.Tag == "ul" || s.Tag == "li")).ToList();
 
             var text = HtmlRemoval.StripTagsRegex(_sampleHTMLString);
-            var substring = text.Substring(0, _breaks.First().StartIndex);
-            _indexOffset = _breaks.First().StartIndex;
-            Debug.WriteLine("Offset = " + _indexOffset);
-            _breaks.RemoveAt(0);
+           
+            //_indexOffset = _breaks.First().StartIndex;
+            //Debug.WriteLine("Offset = " + _indexOffset);
+            //_breaks.RemoveAt(0);
 
-            _tl = new CanvasTextLayout(xCanvas, substring, new CanvasTextFormat(), 300, 300);
+            _tl = new CanvasTextLayout(xCanvas, text, new CanvasTextFormat(), 300, 300);
             _textLayouts.Add(_tl);
 
             foreach (var parsedItem in _parsedItems)
@@ -105,78 +107,66 @@ namespace HTMLToWin2DParser
 
                 if (parsedItem.Tag == "b")
                 {
-                    _tl.SetFontWeight(parsedItem.StartIndex - _indexOffset, parsedItem.Length, FontWeights.ExtraBold);
+                    _tl.SetFontWeight(parsedItem.StartIndex, parsedItem.Length, FontWeights.ExtraBold);
                 }
 
                 if  (parsedItem.Tag == "br")
                 {
+                    //text = text.Substring(parsedItem.StartIndex);
+                    //textblock = text.Substring(0, _breaks.First().StartIndex -parsedItem.StartIndex);
+                    //_tl = new CanvasTextLayout(xCanvas, textblock, new CanvasTextFormat(), 300, 1000);
+                    //_textLayouts.Add(_tl);
                     
-                    var followingText = text.Substring(parsedItem.StartIndex);
-                    if (_breaks.Count > 0)
-                    {
-                        substring = followingText.Substring(0, _breaks.First().StartIndex);
-                        _indexOffset += _breaks.First().StartIndex;
-                        Debug.WriteLine("Offset = " + _indexOffset);
-                        _breaks.RemoveAt(0);
-                    }
-                    else
-                    {
-                        substring = followingText;
-                    }
-                    
-                    _tl = new CanvasTextLayout(xCanvas, substring, new CanvasTextFormat(), 300, 1000);
-                    _textLayouts.Add(_tl);
-
                 }
 
                 if (parsedItem.Tag == "p")
                 {
-                    _textLayouts.Add(_tl);
-                    var followingText = text.Substring(parsedItem.StartIndex);
-                    _tl = new CanvasTextLayout(xCanvas, followingText, new CanvasTextFormat(), 300, 1000);
+                    //_textLayouts.Add(_tl);
+                    //var followingText = text.Substring(parsedItem.StartIndex);
+                    //_tl = new CanvasTextLayout(xCanvas, followingText, new CanvasTextFormat(), 300, 1000);
 
-                    float space = (float) 4.0;
-                    _tl.SetCharacterSpacing(0, parsedItem.Length, space, 0, 0);
+                    //float space = (float) 4.0;
+                    //_tl.SetCharacterSpacing(0, parsedItem.Length, space, 0, 0);
                 }
 
                 if (parsedItem.Tag == "u")
                 {
-                    _tl.SetUnderline(parsedItem.StartIndex - _indexOffset, parsedItem.Length, true);
+                    _tl.SetUnderline(parsedItem.StartIndex, parsedItem.Length, true);
                 }
 
                 if (parsedItem.Tag == "i")
                 {
-                    _tl.SetFontStyle(parsedItem.StartIndex - _indexOffset, parsedItem.Length, FontStyle.Italic);
+                    _tl.SetFontStyle(parsedItem.StartIndex, parsedItem.Length, FontStyle.Italic);
                 }
 
                 if (parsedItem.Tag == "strike")
                 {
-                    _tl.SetStrikethrough(parsedItem.StartIndex - _indexOffset, parsedItem.Length, true);
+                    _tl.SetStrikethrough(parsedItem.StartIndex, parsedItem.Length, true);
                 }
 
                 if (parsedItem.Tag == "h1")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 36);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 36);
                 }
                 if (parsedItem.Tag == "h2")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 28);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 28);
                 }
                 if (parsedItem.Tag == "h3")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 22);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 22);
                 }
                 if (parsedItem.Tag == "h4")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 18);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 18);
                 }
                 if (parsedItem.Tag == "h5")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 13);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 13);
                 }
                 if (parsedItem.Tag == "h6")
                 {
-                    _tl.SetFontSize(parsedItem.StartIndex - _indexOffset, parsedItem.Length, 11);
+                    _tl.SetFontSize(parsedItem.StartIndex, parsedItem.Length, 11);
                 }
                 
                 if (parsedItem.Tag == "ol")
@@ -191,7 +181,7 @@ namespace HTMLToWin2DParser
 
                 if (parsedItem.Tag == "li")
                 {
-                    AddLineBreak(parsedItem);
+                    //AddLineBreak(parsedItem);
                 }
             }
 
@@ -202,6 +192,7 @@ namespace HTMLToWin2DParser
         public HtmlDocument GetHTMLFromSample()
         {
             HtmlDocument document = new HtmlDocument();
+            _sampleHTMLString = AddWhiteSpace(_sampleHTMLString);
             document.LoadHtml(_sampleHTMLString);
             return document;
         }
@@ -222,7 +213,6 @@ namespace HTMLToWin2DParser
                 }
 
                 var innerString = HtmlRemoval.StripTagsRegex(node.InnerHtml);
-                //Debug.WriteLine(node.Name + " " + innerString);
                 var item = new ParseItem();
                 item.Text = innerString;
                 item.Length = innerString.Length;
@@ -233,5 +223,20 @@ namespace HTMLToWin2DParser
                 characterIndex += item.Length;
             }
         }
+        public string AddWhiteSpace(string htmlString)
+        {
+            htmlString = htmlString.Replace("<br>", "\n");
+            htmlString = htmlString.Replace("<p>", "\n \t");
+            htmlString = htmlString.Replace("</p>", "\n");
+            htmlString = htmlString.Replace("<ul>", "\n");
+            htmlString = htmlString.Replace("</ul>", "\n");
+            htmlString = htmlString.Replace("<ol>", "\n");
+            htmlString = htmlString.Replace("</ol>", "\n");
+            htmlString = htmlString.Replace("<li>", "\u2022");
+            
+            return htmlString;
+        }
     }
+
+    
 }
